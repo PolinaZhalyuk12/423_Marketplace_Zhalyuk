@@ -3,9 +3,85 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       Title="Регистрация">
     <Grid>
-        <TextBlock Text="Страница регистрации (заглушка)"
-                   FontSize="24"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="61*"/>
+            <ColumnDefinition Width="739*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+
+            <TextBlock Text="Регистрация" FontSize="28" FontWeight="Bold"
+                       HorizontalAlignment="Left" Margin="69,0,0,20"/>
+
+            <Label Content="Введите логин"
+                   HorizontalAlignment="Left" Margin="69,15,0,0"/>
+            <Grid HorizontalAlignment="Left" Margin="69,0,0,0" Width="320">
+                <TextBox x:Name="txtbxLog" Width="320"
+                         ToolTip="Введите логин или почту"
+                         TextChanged="txtbxLog_TextChanged"/>
+                <TextBlock x:Name="lblLogHint" Text="Введите логин"
+                           Foreground="Gray" FontSize="14"
+                           Margin="10,0,0,0" VerticalAlignment="Center"
+                           IsHitTestVisible="False"
+                           MouseLeftButtonUp="lblLogHint_MouseLeftButtonUp"/>
+            </Grid>
+
+            <Label Content="Введите пароль"
+                   HorizontalAlignment="Left" Margin="69,10,0,0"/>
+            <Grid HorizontalAlignment="Left" Margin="69,0,0,0" Width="320">
+                <PasswordBox x:Name="passBxFrst" Width="320"
+                             ToolTip="Введите пароль"
+                             PasswordChanged="passBxFrst_PasswordChanged"/>
+                <TextBlock x:Name="lblPassHint" Text="Введите пароль"
+                           Foreground="Gray" FontSize="14"
+                           Margin="10,0,0,0" VerticalAlignment="Center"
+                           IsHitTestVisible="False"
+                           MouseLeftButtonUp="lblPassHint_MouseLeftButtonUp"/>
+            </Grid>
+
+            <Label Content="Подтвердите пароль"
+                   HorizontalAlignment="Left" Margin="69,10,0,0"/>
+            <Grid HorizontalAlignment="Left" Margin="69,0,0,0" Width="320">
+                <PasswordBox x:Name="passBxScnd" Width="320"
+                             ToolTip="Повторите пароль"
+                             PasswordChanged="passBxScnd_PasswordChanged"/>
+                <TextBlock x:Name="lblPassSecHint" Text="Повторите пароль"
+                           Foreground="Gray" FontSize="14"
+                           Margin="10,0,0,0" VerticalAlignment="Center"
+                           IsHitTestVisible="False"
+                           MouseLeftButtonUp="lblPassSecHint_MouseLeftButtonUp"/>
+            </Grid>
+
+            <Label Content="Выберите роль"
+                   HorizontalAlignment="Left" Margin="69,10,0,0"/>
+            <ComboBox x:Name="comboBox" Width="320" Height="30"
+                      HorizontalAlignment="Left" Margin="69,0,0,0"
+                      ToolTip="Выберите роль"
+                      SelectedIndex="0">
+                <ComboBoxItem Content="User"/>
+                <ComboBoxItem Content="Seller"/>
+                <ComboBoxItem Content="Admin"/>
+            </ComboBox>
+
+            <Label Content="Введите ФИО"
+                   HorizontalAlignment="Left" Margin="69,10,0,0"/>
+            <Grid HorizontalAlignment="Left" Margin="69,0,0,0" Width="320">
+                <TextBox x:Name="txtbxFIO" Width="320"
+                         ToolTip="Введите ФИО"
+                         TextChanged="txtbxFIO_TextChanged"/>
+                <TextBlock x:Name="lblFioHint" Text="Введите ФИО"
+                           Foreground="Gray" FontSize="14"
+                           Margin="10,0,0,0" VerticalAlignment="Center"
+                           IsHitTestVisible="False"
+                           MouseLeftButtonUp="lblFioHint_MouseLeftButtonUp"/>
+            </Grid>
+
+            <Button x:Name="regButton" Content="Зарегистрироваться"
+                    Height="34" Width="200"
+                    Margin="69,20,0,0" HorizontalAlignment="Left"
+                    ToolTip="Создать новый аккаунт"
+                    Click="regButton_Click"/>
+
+        </StackPanel>
     </Grid>
 </Page>
