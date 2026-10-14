@@ -72,12 +72,21 @@ namespace _423_Marketplace_Zhalyuk.Pages
 
                 if (user == null)
                 {
-                    MessageBox.Show("Пользователь с такими данными не найден!",
+                    failedAttempts++;
+                    MessageBox.Show(
+                        $"Пользователь с такими данными не найден!\nНеудачных попыток: {failedAttempts} из 3.",
                         "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                    if (failedAttempts >= 3)
+                    {
+                        CaptchaSwitch();
+                        CaptchaChange();
+                    }
                     return;
                 }
 
-                MessageBox.Show($"Пользователь успешно найден! Добро пожаловать, {user.FIO}",
+                MessageBox.Show(
+                    $"Пользователь успешно найден! Добро пожаловать, {user.FIO}",
                     "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 string roleName = user.Role?.Name ?? "";
@@ -96,10 +105,76 @@ namespace _423_Marketplace_Zhalyuk.Pages
             }
         }
 
+        public void CaptchaSwitch()
+        {
+            switch (CaptchaPanel.Visibility)
+            {
+                case Visibility.Visible:
+                    TextBoxLogin.Clear();
+                    PasswordBox.Clear();
+
+                    CaptchaPanel.Visibility = Visibility.Collapsed;
+                    AuthPanel.Visibility = Visibility.Visible;
+                    return;
+
+                case Visibility.Collapsed:
+                    CaptchaPanel.Visibility = Visibility.Visible;
+                    AuthPanel.Visibility = Visibility.Collapsed;
+                    return;
+            }
+        }
+
+        public void CaptchaChange()
+        {
+            string allowchar = "";
+            allowchar = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z";
+            allowchar += ",a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,y,z";
+            allowchar += ",1,2,3,4,5,6,7,8,9,0";
+
+            char[] a = { ',' };
+            string[] ar = allowchar.Split(a);
+            string pwd = "";
+            string temp = "";
+            Random r = new Random();
+
+            for (int i = 0; i < 6; i++)
+            {
+                temp = ar[(r.Next(0, ar.Length))];
+                pwd += temp;
+            }
+            captcha.Text = pwd;
+            captchaInput.Clear();
+        }
+        private void submitCaptcha_Click(object sender, RoutedEventArgs e)
+        {
+            if (captchaInput.Text != captcha.Text)
+            {
+                MessageBox.Show("Неверно введена капча!", "Ошибка",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                CaptchaChange();
+                return;
+            }
+
+            failedAttempts = 0;
+            CaptchaSwitch();
+            MessageBox.Show("Капча пройдена! Теперь попробуйте войти снова.",
+                "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void TextBox_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Command == ApplicationCommands.Paste ||
+                e.Command == ApplicationCommands.Cut)
+            {
+                e.Handled = true; 
+            }
+        }
+
         private void ButtonReg_Click(object sender, RoutedEventArgs e)
         {
             NavigationService?.Navigate(new RegPage());
         }
+
         private void ButtonChangePassword_Click(object sender, RoutedEventArgs e)
         {
             NavigationService?.Navigate(new ChangePassPage());

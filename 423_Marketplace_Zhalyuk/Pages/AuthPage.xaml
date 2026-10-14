@@ -13,49 +13,82 @@
             <TextBlock Text="Авторизация" FontSize="28" FontWeight="Bold"
                        HorizontalAlignment="Left" Margin="69,0,0,20"/>
 
-            <Label x:Name="labelLogin" Content="Введите логин"
-                   HorizontalAlignment="Left" Margin="69,20,0,0"/>
-            <Grid HorizontalAlignment="Left" Margin="69,0,0,0" Width="320">
-                <TextBox x:Name="TextBoxLogin" Width="320"
-                         ToolTip="Введите логин"
-                         TextChanged="TextBoxLogin_TextChanged"/>
-                <TextBlock x:Name="txtHintLogin" Text="Введите логин"
-                           Foreground="Gray" FontSize="14"
-                           Margin="10,0,0,0" VerticalAlignment="Center"
-                           IsHitTestVisible="False"
-                           MouseLeftButtonUp="txtHintLogin_MouseLeftButtonUp"/>
-            </Grid>
+            <StackPanel x:Name="AuthPanel">
 
-            <Label x:Name="labelPass" Content="Введите пароль"
-                   HorizontalAlignment="Left" Margin="69,15,0,0"/>
-            <Grid HorizontalAlignment="Left" Margin="69,0,0,0" Width="320">
-                <PasswordBox x:Name="PasswordBox" Width="320"
-                             ToolTip="Введите пароль"
-                             PasswordChanged="PasswordBox_PasswordChanged"/>
-                <TextBlock x:Name="txtHintPass" Text="Введите пароль"
-                           Foreground="Gray" FontSize="14"
-                           Margin="10,0,0,0" VerticalAlignment="Center"
-                           IsHitTestVisible="False"
-                           MouseLeftButtonUp="txtHintPass_MouseLeftButtonUp"/>
-            </Grid>
+                <Label x:Name="labelLogin" Content="Введите логин"
+                       HorizontalAlignment="Left" Margin="69,20,0,0"/>
+                <Grid HorizontalAlignment="Left" Margin="69,0,0,0" Width="320">
+                    <TextBox x:Name="TextBoxLogin" Width="320"
+                             ToolTip="Введите логин"
+                             TextChanged="TextBoxLogin_TextChanged"/>
+                    <TextBlock x:Name="txtHintLogin" Text="Введите логин"
+                               Foreground="Gray" FontSize="14"
+                               Margin="10,0,0,0" VerticalAlignment="Center"
+                               IsHitTestVisible="False"
+                               MouseLeftButtonUp="txtHintLogin_MouseLeftButtonUp"/>
+                </Grid>
 
-            <Button x:Name="ButtonEnter" Content="Вход"
-                    Margin="69,20,0,0" Height="34"
-                    HorizontalAlignment="Left" Width="150"
-                    ToolTip="Кнопка входа"
-                    Click="ButtonEnter_Click"/>
+                <!-- Пароль -->
+                <Label x:Name="labelPass" Content="Введите пароль"
+                       HorizontalAlignment="Left" Margin="69,15,0,0"/>
+                <Grid HorizontalAlignment="Left" Margin="69,0,0,0" Width="320">
+                    <PasswordBox x:Name="PasswordBox" Width="320"
+                                 ToolTip="Введите пароль"
+                                 PasswordChanged="PasswordBox_PasswordChanged"/>
+                    <TextBlock x:Name="txtHintPass" Text="Введите пароль"
+                               Foreground="Gray" FontSize="14"
+                               Margin="10,0,0,0" VerticalAlignment="Center"
+                               IsHitTestVisible="False"
+                               MouseLeftButtonUp="txtHintPass_MouseLeftButtonUp"/>
+                </Grid>
 
-            <Button x:Name="ButtonReg" Content="Регистрация"
-                    Margin="69,10,0,0" Height="34"
-                    HorizontalAlignment="Left" Width="150"
-                    ToolTip="Кнопка регистрации"
-                    Click="ButtonReg_Click"/>
+                <Button x:Name="ButtonEnter" Content="Вход"
+                        Margin="69,20,0,0" Height="34"
+                        HorizontalAlignment="Left" Width="150"
+                        ToolTip="Кнопка входа"
+                        Click="ButtonEnter_Click"/>
 
-            <Button x:Name="ButtonChangePassword" Content="Смена пароля"
-                    Margin="69,10,0,0" Height="34"
-                    HorizontalAlignment="Left" Width="150"
-                    ToolTip="Кнопка смены пароля"
-                    Click="ButtonChangePassword_Click"/>
+                <Button x:Name="ButtonReg" Content="Регистрация"
+                        Margin="69,10,0,0" Height="34"
+                        HorizontalAlignment="Left" Width="150"
+                        ToolTip="Кнопка регистрации"
+                        Click="ButtonReg_Click"/>
+
+                <Button x:Name="ButtonChangePassword" Content="Смена пароля"
+                        Margin="69,10,0,0" Height="34"
+                        HorizontalAlignment="Left" Width="150"
+                        ToolTip="Кнопка смены пароля"
+                        Click="ButtonChangePassword_Click"/>
+            </StackPanel>
+
+            <StackPanel x:Name="CaptchaPanel" Visibility="Collapsed">
+
+                <Label x:Name="labelCaptcha" Content="Введите капчу"
+                       HorizontalAlignment="Left" Margin="69,20,0,0"/>
+
+                <TextBox x:Name="captcha" Height="42" Width="320"
+                         IsReadOnly="True" FontSize="20" FontStyle="Italic"
+                         FontWeight="Heavy" Foreground="Red"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         HorizontalContentAlignment="Center"
+                         VerticalContentAlignment="Center"
+                         Margin="69,5,0,0"
+                         HorizontalAlignment="Left"/>
+
+                <TextBox x:Name="captchaInput" Height="34" Width="320"
+                         Margin="69,5,0,0"
+                         HorizontalAlignment="Left"
+                         ToolTip="Введите символы с картинки"
+                         CommandManager.PreviewExecuted="TextBox_PreviewExecuted"
+                         ContextMenu="{x:Null}"/>
+
+                <Button x:Name="submitCaptcha" Content="Проверить"
+                        Height="34" Width="150" Margin="69,10,0,0"
+                        HorizontalAlignment="Left"
+                        ToolTip="Проверить капчу"
+                        Click="submitCaptcha_Click"/>
+            </StackPanel>
 
         </StackPanel>
     </Grid>
