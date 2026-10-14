@@ -98,6 +98,9 @@ namespace _423_Marketplace_Zhalyuk.Pages
                     case "Seller":
                         NavigationService?.Navigate(new UserPage());
                         break;
+                    case "Buyer":
+                        NavigationService?.Navigate(new UserPage());
+                        break;
                     default:
                         NavigationService?.Navigate(new UserPage());
                         break;

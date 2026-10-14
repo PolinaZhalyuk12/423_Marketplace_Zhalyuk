@@ -55,10 +55,10 @@
             <Label Content="Выберите роль"
                    HorizontalAlignment="Left" Margin="69,10,0,0"/>
             <ComboBox x:Name="comboBox" Width="320" Height="30"
-                      HorizontalAlignment="Left" Margin="69,0,0,0"
-                      ToolTip="Выберите роль"
-                      SelectedIndex="0">
-                <ComboBoxItem Content="User"/>
+          HorizontalAlignment="Left" Margin="69,0,0,0"
+          ToolTip="Выберите роль"
+          SelectedIndex="0">
+                <ComboBoxItem Content="Buyer"/>
                 <ComboBoxItem Content="Seller"/>
                 <ComboBoxItem Content="Admin"/>
             </ComboBox>

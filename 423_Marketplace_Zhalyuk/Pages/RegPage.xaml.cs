@@ -137,7 +137,7 @@ namespace _423_Marketplace_Zhalyuk.Pages
                     return;
                 }
 
-                string selectedRole = (comboBox.SelectedItem as ComboBoxItem)?.Content?.ToString() ?? "User";
+                string selectedRole = (comboBox.SelectedItem as ComboBoxItem)?.Content?.ToString() ?? "Buyer";
 
                 var role = db.Role
                     .AsNoTracking()
