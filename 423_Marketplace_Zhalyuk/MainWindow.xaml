@@ -10,7 +10,11 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="45"/>
         </Grid.RowDefinitions>
-
+        
+        <Button x:Name="BtnTheme" Grid.Row="0" Content="Сменить тему"
+        HorizontalAlignment="Right" Width="130" Margin="0,5,10,5"
+        Click="BtnTheme_Click"/>
+        
         <Button x:Name="BtnBack" Grid.Row="0" Content="Назад"
                 HorizontalAlignment="Left" Width="100" Margin="10,5,0,5"
                 Click="BtnBack_Click"/>

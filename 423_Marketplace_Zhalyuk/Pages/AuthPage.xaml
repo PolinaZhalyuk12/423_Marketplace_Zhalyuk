@@ -1,0 +1,20 @@
+﻿<Page x:Class="_423_Marketplace_Zhalyuk.Pages.AuthPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Авторизация">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
+                    Width="320">
+            <TextBlock Text="Авторизация" FontSize="28" FontWeight="Bold"
+                       HorizontalAlignment="Center" Margin="0,0,0,20"/>
+            <TextBox x:Name="TextBoxLogin" ToolTip="Введите логин"/>
+            <PasswordBox x:Name="PasswordBox" ToolTip="Введите пароль"/>
+            <Button x:Name="ButtonEnter" Content="Вход"
+                    Click="ButtonEnter_Click"/>
+            <Button x:Name="ButtonReg" Content="Регистрация"
+                    Click="ButtonReg_Click"/>
+            <Button x:Name="ButtonChangePassword" Content="Смена пароля"
+                    Click="ButtonChangePassword_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>
