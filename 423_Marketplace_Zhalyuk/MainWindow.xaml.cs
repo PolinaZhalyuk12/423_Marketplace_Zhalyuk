@@ -54,18 +54,19 @@ namespace _423_Marketplace_Zhalyuk
         private void BtnTheme_Click(object sender, RoutedEventArgs e)
         {
             _isDarkTheme = !_isDarkTheme;
-            string dictionary = _isDarkTheme ? "DictionaryDark.xaml" : "Dictionary.xaml";
 
-            var uri = new Uri(dictionary, UriKind.Relative);
+            string dictName = _isDarkTheme ? "DictionaryDark.xaml" : "Dictionary.xaml";
 
-            ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
+            var newDict = new ResourceDictionary
+            {
+                Source = new Uri(dictName, UriKind.Relative)
+            };
 
-            Application.Current.Resources.Clear();
-
-            Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+            Application.Current.Resources.MergedDictionaries.Clear();
+            Application.Current.Resources.MergedDictionaries.Add(newDict);
 
             Properties.Settings.Default.Theme = _isDarkTheme ? "Dark" : "Light";
             Properties.Settings.Default.Save();
         }
     }
-}
+ }
