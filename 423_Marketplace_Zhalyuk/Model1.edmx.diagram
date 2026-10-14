@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7ef648913b614e0db220c3698792e7eb" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_Marketplace_ZhalyukPolinaModel.Category" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Marketplace_ZhalyukPolinaModel.Order" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Marketplace_ZhalyukPolinaModel.OrderItem" Width="1.5" PointX="10.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Marketplace_ZhalyukPolinaModel.OrderStatus" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Marketplace_ZhalyukPolinaModel.Product" Width="1.5" PointX="8.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Marketplace_ZhalyukPolinaModel.Review" Width="1.5" PointX="13.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Marketplace_ZhalyukPolinaModel.Role" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Marketplace_ZhalyukPolinaModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Marketplace_ZhalyukPolinaModel.User" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <AssociationConnector Association="DB_Marketplace_ZhalyukPolinaModel.FK__Category__Parent__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Marketplace_ZhalyukPolinaModel.FK__Product__Categor__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Marketplace_ZhalyukPolinaModel.FK__Order__StatusID__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Marketplace_ZhalyukPolinaModel.FK__Order__UserID__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Marketplace_ZhalyukPolinaModel.FK__OrderItem__Order__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Marketplace_ZhalyukPolinaModel.FK__OrderItem__Produ__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Marketplace_ZhalyukPolinaModel.FK__Product__SellerI__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Marketplace_ZhalyukPolinaModel.FK__Review__ProductI__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Marketplace_ZhalyukPolinaModel.FK__Review__UserID__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Marketplace_ZhalyukPolinaModel.FK__User__RoleID__4F7CD00D" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
