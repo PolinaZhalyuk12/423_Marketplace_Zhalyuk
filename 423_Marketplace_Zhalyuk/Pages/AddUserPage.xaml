@@ -1,0 +1,54 @@
+﻿<Page x:Class="_423_Marketplace_Zhalyuk.Pages.AddUserPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Пользователь">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Логин" FontSize="16" Margin="5"/>
+        <TextBox   Grid.Row="0" Grid.Column="1" x:Name="TBLogin"
+                   Text="{Binding Login}" Margin="5" ToolTip="Введите логин"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Пароль" FontSize="16" Margin="5"/>
+        <TextBox   Grid.Row="1" Grid.Column="1" x:Name="TBPass"
+                   Text="{Binding Password}" Margin="5" ToolTip="Введите пароль"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Роль" FontSize="16" Margin="5"/>
+        <ComboBox  Grid.Row="2" Grid.Column="1" x:Name="cmbRole"
+                   SelectedItem="{Binding Role}" Margin="5"
+                   DisplayMemberPath="Name"
+                   ToolTip="Выберите роль"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="ФИО" FontSize="16" Margin="5"/>
+        <TextBox   Grid.Row="3" Grid.Column="1" x:Name="TBFio"
+                   Text="{Binding FIO}" Margin="5" ToolTip="Введите ФИО"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Email" FontSize="16" Margin="5"/>
+        <TextBox   Grid.Row="4" Grid.Column="1" x:Name="TBEmail"
+                   Text="{Binding Email}" Margin="5" ToolTip="Введите email"/>
+
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Фото (путь)" FontSize="16" Margin="5"/>
+        <TextBox   Grid.Row="5" Grid.Column="1" x:Name="TBPhoto"
+                   Text="{Binding Photo}" Margin="5" ToolTip="Путь к фото"/>
+
+        <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Orientation="Horizontal"
+                    HorizontalAlignment="Center" Margin="0,20,0,0">
+            <Button x:Name="ButtonSave" Content="Сохранить"
+                    Width="150" Margin="5" Click="ButtonSave_Click"/>
+            <Button x:Name="ButtonClean" Content="Очистить"
+                    Width="150" Margin="5" Click="ButtonClean_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>
