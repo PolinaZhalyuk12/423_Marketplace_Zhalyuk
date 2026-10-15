@@ -155,7 +155,8 @@ namespace _423_Marketplace_Zhalyuk.Pages
                     Login = txtbxLog.Text,
                     Password = GetHash(passBxFrst.Password),
                     RoleID = role.ID,
-                    FIO = txtbxFIO.Text
+                    FIO = txtbxFIO.Text,
+                    CreatedAt = DateTime.Now
                 };
 
                 db.User.Add(newUser);
