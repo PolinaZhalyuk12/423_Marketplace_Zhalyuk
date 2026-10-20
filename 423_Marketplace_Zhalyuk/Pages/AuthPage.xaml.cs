@@ -110,20 +110,37 @@ namespace _423_Marketplace_Zhalyuk.Pages
 
         public void CaptchaSwitch()
         {
-            switch (CaptchaPanel.Visibility)
+            if (CaptchaPanel.Visibility == Visibility.Collapsed)
             {
-                case Visibility.Visible:
-                    TextBoxLogin.Clear();
-                    PasswordBox.Clear();
+                CaptchaPanel.Visibility = Visibility.Visible;
 
-                    CaptchaPanel.Visibility = Visibility.Collapsed;
-                    AuthPanel.Visibility = Visibility.Visible;
-                    return;
+                TextBoxLogin.Visibility = Visibility.Collapsed;
+                txtHintLogin.Visibility = Visibility.Collapsed;
+                labelLogin.Visibility = Visibility.Collapsed; 
 
-                case Visibility.Collapsed:
-                    CaptchaPanel.Visibility = Visibility.Visible;
-                    AuthPanel.Visibility = Visibility.Collapsed;
-                    return;
+                PasswordBox.Visibility = Visibility.Collapsed;
+                txtHintPass.Visibility = Visibility.Collapsed;
+                labelPass.Visibility = Visibility.Collapsed;
+
+                ButtonEnter.Visibility = Visibility.Collapsed;
+                ButtonReg.Visibility = Visibility.Collapsed;
+                ButtonChangePassword.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                CaptchaPanel.Visibility = Visibility.Collapsed;
+
+                TextBoxLogin.Visibility = Visibility.Visible;
+                txtHintLogin.Visibility = Visibility.Visible;
+                labelLogin.Visibility = Visibility.Visible;
+
+                PasswordBox.Visibility = Visibility.Visible;
+                txtHintPass.Visibility = Visibility.Visible;
+                labelPass.Visibility = Visibility.Visible;
+
+                ButtonEnter.Visibility = Visibility.Visible;
+                ButtonReg.Visibility = Visibility.Visible;
+                ButtonChangePassword.Visibility = Visibility.Visible;
             }
         }
 

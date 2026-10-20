@@ -196,26 +196,31 @@ namespace _423_Marketplace_Zhalyuk.Pages
                     {
                         int startRowIndex = 1;
                         Excel.Worksheet worksheet = application.Worksheets.Item[i + 1];
-                        worksheet.Name = allUsers[i].FIO.Length > 31
-                            ? allUsers[i].FIO.Substring(0, 31)
-                            : allUsers[i].FIO;
 
-                        worksheet.Cells[1][startRowIndex] = "Дата";
-                        worksheet.Cells[2][startRowIndex] = "Название";
-                        worksheet.Cells[3][startRowIndex] = "Цена";
-                        worksheet.Cells[4][startRowIndex] = "Количество";
-                        worksheet.Cells[5][startRowIndex] = "Сумма";
+                        var currentUser = allUsers[i];
+                        string sheetName = currentUser.FIO;
 
-                        Excel.Range columnHeaderRange = worksheet.Range[worksheet.Cells[1][1], worksheet.Cells[5][1]];
+                        if (string.IsNullOrWhiteSpace(sheetName)) sheetName = "User_" + currentUser.ID;
+                        if (sheetName.Length > 31) sheetName = sheetName.Substring(0, 31);
+                        worksheet.Name = sheetName;
+
+                        worksheet.Cells[startRowIndex, 1] = "Дата";
+                        worksheet.Cells[startRowIndex, 2] = "Название";
+                        worksheet.Cells[startRowIndex, 3] = "Цена";
+                        worksheet.Cells[startRowIndex, 4] = "Количество";
+                        worksheet.Cells[startRowIndex, 5] = "Сумма";
+
+                        Excel.Range columnHeaderRange = worksheet.Range[worksheet.Cells[1, 1], worksheet.Cells[1, 5]];
                         columnHeaderRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                         columnHeaderRange.Font.Bold = true;
                         startRowIndex++;
 
-                        var products = db.Product.Where(p => p.SellerID == allUsers[i].ID).ToList();
+                        var products = db.Product.Where(p => p.SellerID == currentUser.ID).ToList();
 
                         if (products.Count == 0)
                         {
-                            worksheet.Cells[1][startRowIndex] = "Нет товаров";
+                            worksheet.Cells[startRowIndex, 1] = "Нет товаров";
+                            worksheet.Columns.AutoFit();
                             continue;
                         }
 
@@ -227,8 +232,8 @@ namespace _423_Marketplace_Zhalyuk.Pages
                         foreach (var groupCategory in userCategories)
                         {
                             Excel.Range headerRange = worksheet.Range[
-                                worksheet.Cells[1][startRowIndex],
-                                worksheet.Cells[5][startRowIndex]];
+                                worksheet.Cells[startRowIndex, 1],
+                                worksheet.Cells[startRowIndex, 5]];
                             headerRange.Merge();
                             headerRange.Value = groupCategory.Key;
                             headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
@@ -237,40 +242,42 @@ namespace _423_Marketplace_Zhalyuk.Pages
 
                             foreach (var product in groupCategory)
                             {
-                                worksheet.Cells[1][startRowIndex] = product.CreatedAt.ToString("dd.MM.yyyy");
-                                worksheet.Cells[2][startRowIndex] = product.Name;
-                                worksheet.Cells[3][startRowIndex] = product.Price;
-                                (worksheet.Cells[3][startRowIndex] as Excel.Range).NumberFormat = "0.00";
-                                worksheet.Cells[4][startRowIndex] = product.Quantity;
-                                worksheet.Cells[5][startRowIndex].Formula = $"=C{startRowIndex}*D{startRowIndex}";
-                                (worksheet.Cells[5][startRowIndex] as Excel.Range).NumberFormat = "0.00";
+                                worksheet.Cells[startRowIndex, 1] = product.CreatedAt.ToString("dd.MM.yyyy");
+                                worksheet.Cells[startRowIndex, 2] = product.Name;
+                                worksheet.Cells[startRowIndex, 3] = product.Price;
+                                (worksheet.Cells[startRowIndex, 3] as Excel.Range).NumberFormat = "0.00";
+                                worksheet.Cells[startRowIndex, 4] = product.Quantity;
+
+                                worksheet.Cells[startRowIndex, 5].Formula = $"=C{startRowIndex}*D{startRowIndex}";
+                                (worksheet.Cells[startRowIndex, 5] as Excel.Range).NumberFormat = "0.00";
+
                                 startRowIndex++;
                             }
 
                             Excel.Range sumRange = worksheet.Range[
-                                worksheet.Cells[1][startRowIndex],
-                                worksheet.Cells[4][startRowIndex]];
+                                worksheet.Cells[startRowIndex, 1],
+                                worksheet.Cells[startRowIndex, 4]];
                             sumRange.Merge();
                             sumRange.Value = "ИТОГО по категории:";
                             sumRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignRight;
 
-                            worksheet.Cells[5][startRowIndex].Formula = $"=SUM(E{startRowIndex - groupCategory.Count()}:E{startRowIndex - 1})";
+                            worksheet.Cells[startRowIndex, 5].Formula = $"=SUM(E{startRowIndex - groupCategory.Count()}:E{startRowIndex - 1})";
                             sumRange.Font.Bold = true;
-                            (worksheet.Cells[5][startRowIndex] as Excel.Range).Font.Bold = true;
+                            (worksheet.Cells[startRowIndex, 5] as Excel.Range).Font.Bold = true;
 
                             grandTotal += groupCategory.Sum(p => p.Price * p.Quantity);
                             startRowIndex++;
                         }
 
                         Excel.Range rangeBorders = worksheet.Range[
-                            worksheet.Cells[1][1], worksheet.Cells[5][startRowIndex - 1]];
-                        rangeBorders.Borders[Excel.XlBordersIndex.xlEdgeBottom].LineStyle =
-                        rangeBorders.Borders[Excel.XlBordersIndex.xlEdgeLeft].LineStyle =
-                        rangeBorders.Borders[Excel.XlBordersIndex.xlEdgeRight].LineStyle =
-                        rangeBorders.Borders[Excel.XlBordersIndex.xlEdgeTop].LineStyle =
-                        rangeBorders.Borders[Excel.XlBordersIndex.xlInsideHorizontal].LineStyle =
-                        rangeBorders.Borders[Excel.XlBordersIndex.xlInsideVertical].LineStyle =
-                        Excel.XlLineStyle.xlContinuous;
+                            worksheet.Cells[1, 1], worksheet.Cells[startRowIndex - 1, 5]];
+
+                        rangeBorders.Borders[Excel.XlBordersIndex.xlEdgeBottom].LineStyle = Excel.XlLineStyle.xlContinuous;
+                        rangeBorders.Borders[Excel.XlBordersIndex.xlEdgeLeft].LineStyle = Excel.XlLineStyle.xlContinuous;
+                        rangeBorders.Borders[Excel.XlBordersIndex.xlEdgeRight].LineStyle = Excel.XlLineStyle.xlContinuous;
+                        rangeBorders.Borders[Excel.XlBordersIndex.xlEdgeTop].LineStyle = Excel.XlLineStyle.xlContinuous;
+                        rangeBorders.Borders[Excel.XlBordersIndex.xlInsideHorizontal].LineStyle = Excel.XlLineStyle.xlContinuous;
+                        rangeBorders.Borders[Excel.XlBordersIndex.xlInsideVertical].LineStyle = Excel.XlLineStyle.xlContinuous;
 
                         worksheet.Columns.AutoFit();
                     }
