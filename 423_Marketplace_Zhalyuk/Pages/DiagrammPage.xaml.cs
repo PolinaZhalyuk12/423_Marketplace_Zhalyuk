@@ -176,7 +176,6 @@ namespace _423_Marketplace_Zhalyuk.Pages
                     "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
         private void BtnExportExcel_Click(object sender, RoutedEventArgs e)
         {
             try
