@@ -260,6 +260,7 @@
   <ItemGroup>
     <Resource Include="res\default.png" />
     <Resource Include="icon.ico" />
+    <Content Include="db\script.sql" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
